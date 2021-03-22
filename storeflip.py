@@ -49,7 +49,7 @@ else:
 
 # Client Communities Flip
 
-response = requests.put('https://10.104.8.111:8443/ng1api/ncm/clientcommunities/{0}'.format(old_site_name), headers=headers,
+response = requests.get('https://10.104.8.111:8443/ng1api/ncm/clientcommunities/{0}'.format(old_site_name), headers=headers,
                         cookies=cookies, data=new_name, verify=False)
 
 if response.status_code == 404:
@@ -68,6 +68,8 @@ old_name = response.text
 
 new_name = old_name.replace(old_site_name, new_site_name, 2)
 
+response = requests.put('https://10.104.8.111:8443/ng1api/ncm/clientcommunities/{0}'.format(old_site_name), headers=headers,
+                        cookies=cookies, data=new_name, verify=False)
 if response.status_code == 200:
     print
     "Site", old_site_name, "changed to", new_site_name
