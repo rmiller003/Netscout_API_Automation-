@@ -1,4 +1,4 @@
-# This is a NETSCOUT nGeniusONE API Automation Initiative
+# This is a NETSCOUT nG1 API Store Flip Automation Initiative
 # Project is designed and written in Python 3.9 using the Request module
 
 import requests
@@ -7,8 +7,11 @@ import warnings
 
 warnings.filterwarnings("ignore")
 
-old_site_name = 'test1'
-new_site_name = 'Newtest1'
+old_site_name = ' '
+new_site_name = ' '
+
+old_site_name = input("Enter your old site name: ")
+new_site_name = input("Enter new site name: ")
 
 cookies = {
     'NSSESSIONID': 'FWCk17yuvOVPSBVbWV+88+fuhX3/rj57DfzDYz5wKuIw3IGPcoaA17A++jV3/IUQmKKNmFEeNT9GDFYhpL7mrHRLb7XTB+fh2HdBjLqtE/B0Vg0mwU1neLRrnIeud3UN',
@@ -17,6 +20,7 @@ cookies = {
 headers = {
     'Content-Type': 'application/xml',
 }
+############################################################################
 
 # Location Flip
 response = requests.get('https://10.104.8.111:8443/ng1api/ncm/sites/{0}'.format(old_site_name), headers=headers, cookies=cookies, verify=False)
@@ -47,6 +51,7 @@ else:
     print
     "Site name change failed", response.status_code
 
+########################################################################
 
 # Client Communities Flip
 
@@ -77,6 +82,8 @@ if response.status_code == 200:
 else:
     print
     "Site name change failed", response.status_code
+
+############################################################################
 
 # Network Services Flip
 
