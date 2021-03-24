@@ -7,8 +7,10 @@ import warnings
 
 warnings.filterwarnings("ignore")
 
-old_site_name = ' '
-new_site_name = ' '
+old_site_name = ''
+new_site_name = ''
+#old_site_name = sys.argv[1]
+#new_site_name = sys.argv[2]
 
 old_site_name = input("Enter your old site name: ")
 new_site_name = input("Enter new site name: ")
@@ -20,21 +22,23 @@ cookies = {
 headers = {
     'Content-Type': 'application/xml',
 }
+
+
 ############################################################################
 
+
 # Location Flip
-response = requests.get('https://10.104.8.111:8443/ng1api/ncm/sites/{0}'.format(old_site_name), headers=headers, cookies=cookies, verify=False)
+print("Executing Location Flip, please standby ...")
+response = requests.get('https://10.104.8.111:8443/ng1api/ncm/sites/{0}'.format(old_site_name), headers=headers,
+                        cookies=cookies, verify=False)
 
 if response.status_code == 404:
-    print()
-    "Site", old_site_name, "Not Found", response.status_code
+    print("The site", old_site_name, "was Not Found -", response.status_code, "- please check your site and try again")
     sys.exit(response.status_code)
 elif response.status_code == 200:
-    print
-    "Found Site:", old_site_name
+    print("Found the entered site successfully:", old_site_name)
 else:
-    print
-    "something else went wrong ", response.status_code
+    print("Something went wrong, please refer to the error code and try again", response.status_code)
     sys.exit(response.status_code)
 
 old_name = response.text
@@ -45,61 +49,55 @@ response = requests.put('https://10.104.8.111:8443/ng1api/ncm/sites/{0}'.format(
                         cookies=cookies, data=new_name, verify=False)
 
 if response.status_code == 200:
-    print
-    "Site", old_site_name, "changed to", new_site_name
+    print("Site", old_site_name, "changed to", new_site_name, "successfully")
 else:
-    print
-    "Site name change failed", response.status_code
+    print("Site name change failed, please refer to the error code and try again", response.status_code)
+
 
 ########################################################################
 
 # Client Communities Flip
-
-response = requests.get('https://10.104.8.111:8443/ng1api/ncm/clientcommunities/{0}'.format(old_site_name), headers=headers,
+print("\nExecuting Client Communities Flip, please standby ...")
+response = requests.get('https://10.104.8.111:8443/ng1api/ncm/clientcommunities/{0}'.format(old_site_name),
+                        headers=headers,
                         cookies=cookies, data=new_name, verify=False)
 
 if response.status_code == 404:
-    print()
-    "Site", old_site_name, "Not Found", response.status_code
+    print("The site", old_site_name, "was Not Found -", response.status_code, "- please check your site and try again")
     sys.exit(response.status_code)
 elif response.status_code == 200:
-    print
-    "Found Site:", old_site_name
+    print("Found the entered site successfully:", old_site_name)
 else:
-    print
-    "something else went wrong ", response.status_code
+    print("Something went wrong, please refer to the error code and try again", response.status_code)
     sys.exit(response.status_code)
 
 old_name = response.text
 
 new_name = old_name.replace(old_site_name, new_site_name, 2)
 
-response = requests.put('https://10.104.8.111:8443/ng1api/ncm/clientcommunities/{0}'.format(old_site_name), headers=headers,
+response = requests.put('https://10.104.8.111:8443/ng1api/ncm/clientcommunities/{0}'.format(old_site_name),
+                        headers=headers,
                         cookies=cookies, data=new_name, verify=False)
 if response.status_code == 200:
-    print
-    "Site", old_site_name, "changed to", new_site_name
+    print("Site", old_site_name, "changed to", new_site_name, "successfully")
 else:
-    print
-    "Site name change failed", response.status_code
+    print("Site name change failed, please refer to the error code and try again", response.status_code)
+
 
 ############################################################################
 
 # Network Services Flip
-
+print("\nExecuting Network Services Flip, please standby ...")
 response = requests.get('https://10.104.8.111:8443/ng1api/ncm/services/{0}'.format(old_site_name), headers=headers,
                         cookies=cookies, data=new_name, verify=False)
 
 if response.status_code == 404:
-    print()
-    "Site", old_site_name, "Not Found", response.status_code
+    print("The site", old_site_name, "was Not Found -", response.status_code, "- please check your site and try again")
     sys.exit(response.status_code)
 elif response.status_code == 200:
-    print
-    "Found Site:", old_site_name
+    print("Found the entered site successfully:", old_site_name)
 else:
-    print
-    "something else went wrong ", response.status_code
+    print("Something went wrong, please refer to the error code and try again", response.status_code)
     sys.exit(response.status_code)
 
 old_name = response.text
@@ -109,8 +107,8 @@ new_name = old_name.replace(old_site_name, new_site_name, 2)
 response = requests.put('https://10.104.8.111:8443/ng1api/ncm/services/{0}'.format(old_site_name), headers=headers,
                         cookies=cookies, data=new_name, verify=False)
 if response.status_code == 200:
-    print
-    "Site", old_site_name, "changed to", new_site_name
+    print("Site", old_site_name, "changed to", new_site_name, "successfully")
 else:
-    print
-    "Site name change failed", response.status_code
+    print("Site name change failed, please refer to the error code and try again", response.status_code)
+
+print("\nProgram executed successfully")
