@@ -86,7 +86,13 @@ else:
 
 ############################################################################
 
-# Network Services Flip
+# Service Configuration Flip
+old_site_name = ''
+new_site_name = ''
+
+old_site_name = input("Enter your old site name: ")
+new_site_name = input("Enter new site name: ")
+
 print("\nExecuting Network Services Flip, please standby ...")
 response = requests.get('https://10.104.8.111:8443/ng1api/ncm/services/{0}'.format(old_site_name), headers=headers,
                         cookies=cookies, data=new_name, verify=False)
