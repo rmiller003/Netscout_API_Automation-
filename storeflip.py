@@ -29,7 +29,7 @@ headers = {
 
 # Location Flip
 print("Executing Location Flip, please standby ...")
-response = requests.get('https://10.104.8.111:8443/ng1api/ncm/sites/{0}'.format(old_site_name), headers=headers,
+response = requests.get('https://HE-DGM.ngco.com:8443/ng1api/ncm/sites/{0}'.format(old_site_name), headers=headers,
                         cookies=cookies, verify=False)
 
 if response.status_code == 404:
@@ -45,7 +45,7 @@ old_name = response.text
 
 new_name = old_name.replace(old_site_name, new_site_name, 2)
 
-response = requests.put('https://10.104.8.111:8443/ng1api/ncm/sites/{0}'.format(old_site_name), headers=headers,
+response = requests.put('https://HE-DGM.ngco.com:8443/ng1api/ncm/sites/{0}'.format(old_site_name), headers=headers,
                         cookies=cookies, data=new_name, verify=False)
 
 if response.status_code == 200:
@@ -75,7 +75,7 @@ old_name = response.text
 
 new_name = old_name.replace(old_site_name, new_site_name, 2)
 
-response = requests.put('https://10.104.8.111:8443/ng1api/ncm/clientcommunities/{0}'.format(old_site_name),
+response = requests.put('https://HE-DGM.ngco.com:8443/ng1api/ncm/clientcommunities/{0}'.format(old_site_name),
                         headers=headers,
                         cookies=cookies, data=new_name, verify=False)
 if response.status_code == 200:
@@ -94,7 +94,7 @@ old_site_name = input("Enter your old site name: ")
 new_site_name = input("Enter new site name: ")
 
 print("\nExecuting Network Services Flip, please standby ...")
-response = requests.get('https://10.104.8.111:8443/ng1api/ncm/services/{0}'.format(old_site_name), headers=headers,
+response = requests.get('https://HE-DGM.ngco.com:8443/ng1api/ncm/services/{0}'.format(old_site_name), headers=headers,
                         cookies=cookies, data=new_name, verify=False)
 
 if response.status_code == 404:
@@ -110,7 +110,7 @@ old_name = response.text
 
 new_name = old_name.replace(old_site_name, new_site_name, 2)
 
-response = requests.put('https://10.104.8.111:8443/ng1api/ncm/services/{0}'.format(old_site_name), headers=headers,
+response = requests.put('https:/HE-DGM.ngco.com/:8443/ng1api/ncm/services/{0}'.format(old_site_name), headers=headers,
                         cookies=cookies, data=new_name, verify=False)
 if response.status_code == 200:
     print("Site", old_site_name, "changed to", new_site_name, "successfully")
